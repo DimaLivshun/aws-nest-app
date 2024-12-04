@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 
 import { v4 } from 'uuid';
 
-import { Cart } from '../models';
+import { Cart, CartStatuses } from '../models';
 
 @Injectable()
 export class CartService {
@@ -16,10 +16,14 @@ export class CartService {
     const id = v4();
     const userCart = {
       id,
+      user_id: `user_mock_id${Math.random()}`,
+      created_at: new Date().toString(),
+      updated_at: new Date().toString(),
+      status: CartStatuses.OPEN,
       items: [],
     };
 
-    this.userCarts[ userId ] = userCart;
+    this.userCarts[userId] = userCart;
 
     return userCart;
   }
